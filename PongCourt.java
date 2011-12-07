@@ -13,7 +13,7 @@ public class PongCourt extends JPanel {
 
 	private int interval = 35; // Milliseconds between updates.
 	private Timer timer;       // Each time timer fires we animate one step.
-	private int invader_interval = 350;
+	private int invader_interval = 600;
 	private Timer invader_timer;
 
 	final int COURTWIDTH = 800;
