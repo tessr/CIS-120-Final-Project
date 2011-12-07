@@ -7,12 +7,14 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class PongCourt extends JPanel {
-	private Ball ball;
 	private Paddle paddle;
 	private ArrayList<Bullet> bullets;
+	private ArrayList<Invader> invaders;
 
 	private int interval = 35; // Milliseconds between updates.
 	private Timer timer;       // Each time timer fires we animate one step.
+	private int invader_interval = 350;
+	private Timer invader_timer;
 
 	final int COURTWIDTH = 800;
 	final int COURTHEIGHT = 600;
@@ -27,6 +29,10 @@ public class PongCourt extends JPanel {
 		timer = new Timer(interval, new ActionListener() {
 			public void actionPerformed(ActionEvent e) { tick(); }});
 		timer.start(); 
+		
+		invader_timer = new Timer(invader_interval, new ActionListener() {
+			public void actionPerformed(ActionEvent e) { invade(); }});
+		invader_timer.start(); 
 
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
@@ -49,18 +55,16 @@ public class PongCourt extends JPanel {
 	}
 
 	public void reset() {
-		ball = new Ball(0, 0, 2, 3);
 		paddle = new Paddle(COURTWIDTH, COURTHEIGHT);
 		bullets = new ArrayList<Bullet>();
+		invaders = new ArrayList<Invader>();
 		grabFocus();
 	}
 
 	void tick() {
-		ball.setBounds(getWidth(), getHeight());
-		ball.move();
 		paddle.setBounds(getWidth(), getHeight());
 		paddle.move();
-		ball.bounce(paddle.intersects(ball));
+		//ball.bounce(paddle.intersects(ball));
 		
 		for(Iterator<Bullet> ii = bullets.iterator(); ii.hasNext();)
 		{
@@ -77,14 +81,29 @@ public class PongCourt extends JPanel {
 		}
 		repaint(); // Repaint indirectly calls paintComponent.
 	}
+	
+	void invade() {
+		invaders.add(new Invader(10,10,1,0));
+		for(Iterator<Invader> ii = invaders.iterator(); ii.hasNext();)
+		{
+			Invader inv = ii.next(); 
+			inv.setBounds(getWidth(),getHeight());
+			inv.move();
+		}
+		
+	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g); // Paint background, border
-		ball.draw(g);
 		paddle.draw(g);
 		for (Bullet bb : bullets)
 		{
 			bb.draw(g);
+		}
+		
+		for(Invader inv : invaders)
+		{
+			inv.draw(g);
 		}
 	}
 }

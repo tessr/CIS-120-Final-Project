@@ -16,7 +16,6 @@ public class Paddle extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		//g.fillRect(x, y, WIDTH, HEIGHT);
 		g.setColor(Color.orange);
 		Font helvetica = new Font("Helvetica", Font.PLAIN, HEIGHT);
 		g.setFont(helvetica);
