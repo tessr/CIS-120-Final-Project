@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.*;
 
@@ -7,12 +9,13 @@ import javax.swing.*;
 public class PongCourt extends JPanel {
 	private Ball ball;
 	private Paddle paddle;
+	private ArrayList<Bullet> bullets;
 
 	private int interval = 35; // Milliseconds between updates.
 	private Timer timer;       // Each time timer fires we animate one step.
 
-	final int COURTWIDTH = 300;
-	final int COURTHEIGHT = 200;
+	final int COURTWIDTH = 800;
+	final int COURTHEIGHT = 600;
 
 	final int PADDLE_VEL = 4;
 
@@ -31,6 +34,8 @@ public class PongCourt extends JPanel {
 					paddle.setVelocity(-PADDLE_VEL, 0);
 				else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 					paddle.setVelocity(PADDLE_VEL, 0);
+				else if (e.getKeyCode() == KeyEvent.VK_SPACE)
+					bullets.add(paddle.fire());
 				else if (e.getKeyCode() == KeyEvent.VK_R)
 					reset();
 			}
@@ -46,6 +51,7 @@ public class PongCourt extends JPanel {
 	public void reset() {
 		ball = new Ball(0, 0, 2, 3);
 		paddle = new Paddle(COURTWIDTH, COURTHEIGHT);
+		bullets = new ArrayList<Bullet>();
 		grabFocus();
 	}
 
@@ -55,6 +61,33 @@ public class PongCourt extends JPanel {
 		paddle.setBounds(getWidth(), getHeight());
 		paddle.move();
 		ball.bounce(paddle.intersects(ball));
+		/*for (Bullet bb : bullets)
+		{
+			if(bb.y > 0)
+			{
+				bb.setBounds(getWidth(), getHeight());
+				bb.move();
+			}
+			else
+			{
+				bullets.remove(bb);
+			}
+			
+		}*/
+		
+		for(Iterator<Bullet> ii = bullets.iterator(); ii.hasNext();)
+		{
+			Bullet bb = ii.next();
+			if(bb.y > 0)
+			{
+				bb.setBounds(getWidth(),getHeight());
+				bb.move();
+			}
+			else
+			{
+				ii.remove();
+			}
+		}
 		repaint(); // Repaint indirectly calls paintComponent.
 	}
 
@@ -62,5 +95,9 @@ public class PongCourt extends JPanel {
 		super.paintComponent(g); // Paint background, border
 		ball.draw(g);
 		paddle.draw(g);
+		for (Bullet bb : bullets)
+		{
+			bb.draw(g);
+		}
 	}
 }
