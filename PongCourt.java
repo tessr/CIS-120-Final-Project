@@ -61,19 +61,6 @@ public class PongCourt extends JPanel {
 		paddle.setBounds(getWidth(), getHeight());
 		paddle.move();
 		ball.bounce(paddle.intersects(ball));
-		/*for (Bullet bb : bullets)
-		{
-			if(bb.y > 0)
-			{
-				bb.setBounds(getWidth(), getHeight());
-				bb.move();
-			}
-			else
-			{
-				bullets.remove(bb);
-			}
-			
-		}*/
 		
 		for(Iterator<Bullet> ii = bullets.iterator(); ii.hasNext();)
 		{
