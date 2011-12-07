@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.util.Random;
 
 public abstract class GameObject {
 	int x; // x and y coordinates upper left
@@ -87,6 +88,13 @@ public abstract class GameObject {
 			return Intersection.LEFT;
 		// if ( diagTheta - Math.PI <= theta && theta <= diagTheta)
 		return Intersection.UP;
+	}
+	
+	public char randomCharacter() {
+		Random rr = new Random();
+		char cc = (char)(rr.nextInt(26) + 'a');
+		return cc;
+		
 	}
 
 	public abstract void accelerate();
