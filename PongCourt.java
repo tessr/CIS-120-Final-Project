@@ -18,7 +18,7 @@ public class PongCourt extends JPanel {
 	private Timer invader_timer;
 
 	final int COURTWIDTH = 800;
-	final int COURTHEIGHT = 600;
+	final int COURTHEIGHT = 400;
 
 	final int PADDLE_VEL = 4;
 	
@@ -84,6 +84,7 @@ public class PongCourt extends JPanel {
 					{
 						ii.remove();
 						invaders.remove(attacked);
+						score++;
 					}
 				}
 				else
@@ -105,7 +106,12 @@ public class PongCourt extends JPanel {
 			inv.move();
 			if(inv.intersects(paddle) != Intersection.NONE)
 			{
-				youlose = true;
+				lives--;
+				ii.remove();
+				if(lives < 1)
+				{
+				  youlose = true;
+				}
 			}
 		}
 		
@@ -143,7 +149,7 @@ public class PongCourt extends JPanel {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font(blackout.getFontName(),Font.PLAIN, 30));
 		g.drawString("Score:_" + score, 120, 30);
-		g.drawString("Lives:_"+lives, 240, 30);
+		g.drawString("Lives:_"+lives, 280, 30);
 
 	}
 }

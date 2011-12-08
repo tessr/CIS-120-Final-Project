@@ -7,7 +7,7 @@ public class Game {
 
 	private Game() {
 		// Top-level frame
-		final JFrame frame = new JFrame("Pong");
+		final JFrame frame = new JFrame("TypeInvaders");
 		frame.setLocation(300, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
