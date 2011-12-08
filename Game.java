@@ -13,7 +13,7 @@ public class Game {
 
 		// Main playing area
 		final PongCourt court = new PongCourt();
-		frame.add(court, BorderLayout.CENTER);
+		frame.add(court, BorderLayout.SOUTH);
 
 		// Reset button
 		final JPanel panel = new JPanel();
@@ -24,7 +24,32 @@ public class Game {
 				court.reset();
 			}
 		});
-		panel.add(reset);
+		//panel.add(reset);
+		
+		final JPanel hello = new JPanel();
+		frame.add(hello, BorderLayout.NORTH);
+		final JLabel welcome = 
+				new JLabel("<html><span style = 'font-family: Blackout; font-size: 30px'>" +
+						"Welcome_to_<br /><big>TypeInvaders</big></span></html>");
+		final JLabel instructions = 
+				new JLabel("<html><span style = 'font-family: Blackout; font-size: 15px'>" +
+						"use_your_spacebar_to_fire_helvetica_characters<br />" +
+						"at_the_oncoming_comic_sans_ms_invaders._use_<br />" +
+						"arrow_keys_to_move._some_invaders_are_tenacious;<br />" +
+						"hang_in_there!</span></html>");
+		hello.add(welcome, BorderLayout.NORTH);
+		hello.add(instructions, BorderLayout.CENTER);
+		
+		/*final JPanel scoreboard = new JPanel();
+		JLabel lives = 
+				new JLabel("<html><span style = 'font-family: Blackout; font-size: 20px'>" +
+						"Lives:_3</span></html>");
+		JLabel score = 
+				new JLabel("<html><span style = 'font-family: Blackout; font-size: 20px'>" +
+						"Score:_0</span></html>");
+		scoreboard.add(lives,BorderLayout.WEST);
+		scoreboard.add(score,BorderLayout.EAST);
+		frame.add(scoreboard,BorderLayout.CENTER);*/
 		
 
 		// Put the frame on the screen

@@ -7,6 +7,7 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class PongCourt extends JPanel {
+	
 	private Paddle paddle;
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Invader> invaders;
@@ -20,10 +21,14 @@ public class PongCourt extends JPanel {
 	final int COURTHEIGHT = 600;
 
 	final int PADDLE_VEL = 4;
+	
+	private int lives = 3;
+	private int score = 0;
+	
+	Font blackout = new Font("Blackout", Font.PLAIN, 60);
 
 	public PongCourt() {
 		setPreferredSize(new Dimension(COURTWIDTH, COURTHEIGHT));
-		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setFocusable(true);
 
 		timer = new Timer(interval, new ActionListener() {
@@ -91,7 +96,7 @@ public class PongCourt extends JPanel {
 	}
 	
 	void invade() {
-		invaders.add(new Invader(10,10,1,0));
+		invaders.add(new Invader(10,30,1,0));
 		boolean youlose = false;
 		for(Iterator<Invader> ii = invaders.iterator(); ii.hasNext();)
 		{
@@ -130,10 +135,15 @@ public class PongCourt extends JPanel {
 		}
 		else
 		{
-			Font blackout = new Font("Blackout", Font.PLAIN, 60);
+			blackout.deriveFont(60);
 			g.setFont(blackout);
 			g.drawString("you lose", COURTWIDTH/2, COURTHEIGHT/2);
 		}
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font(blackout.getFontName(),Font.PLAIN, 30));
+		g.drawString("Score:_" + score, 120, 30);
+		g.drawString("Lives:_"+lives, 240, 30);
 
 	}
 }
