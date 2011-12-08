@@ -26,7 +26,7 @@ public class Paddle extends GameObject {
 	
 	public Bullet fire()
 	{
-		Bullet bb = new Bullet(x + WIDTH/2, y, 0, -1);
+		Bullet bb = new Bullet(x + WIDTH/2, y, 0, -3);
 		if(name.equals("zing!"))
 			name = "wham!";
 		else if (name.equals("wham!"))

@@ -60,7 +60,7 @@ public class PongCourt extends JPanel {
 		invaders = new ArrayList<Invader>();
 		grabFocus();
 	}
-
+	
 	void tick() {
 		paddle.setBounds(getWidth(), getHeight());
 		paddle.move();
@@ -73,6 +73,12 @@ public class PongCourt extends JPanel {
 			{
 				bb.setBounds(getWidth(),getHeight());
 				bb.move();
+				Invader attacked = bb.attacked(invaders);
+				if(attacked != null) 
+				{
+					ii.remove();
+					invaders.remove(attacked);
+				}
 			}
 			else
 			{
@@ -89,6 +95,11 @@ public class PongCourt extends JPanel {
 			Invader inv = ii.next(); 
 			inv.setBounds(getWidth(),getHeight());
 			inv.move();
+			if(inv.intersects(paddle) != Intersection.NONE)
+			{
+				timer.stop();
+				invader_timer.stop();
+			}
 		}
 		
 	}

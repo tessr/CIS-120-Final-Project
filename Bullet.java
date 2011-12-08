@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.List;
+import java.util.ArrayList;
 
 
 public class Bullet extends GameObject {
@@ -23,8 +25,18 @@ public class Bullet extends GameObject {
 		Font helvetica = new Font("Helvetica", Font.PLAIN, SIZE);
 		g.setFont(helvetica);
 		g.drawString(name,x,y + SIZE);
-		//g.drawRect(x, y, SIZE, SIZE);
-
+	}
+	
+	public Invader attacked(ArrayList<Invader> invaders)
+	{
+		for(Invader ii : invaders)
+		{
+			if(intersects(ii) != Intersection.NONE)
+			{
+				return ii;
+			}
+		}
+		return null;
 	}
 
 }
