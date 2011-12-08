@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Paddle extends GameObject {
-	final static int HEIGHT = 30;
+	final static int HEIGHT = 55;
 	final static int WIDTH = 80;
 	String name = "zing!";
 
@@ -18,8 +18,8 @@ public class Paddle extends GameObject {
 
 	public void draw(Graphics g) {
 		g.setColor(Color.orange);
-		Font helvetica = new Font("Helvetica", Font.PLAIN, HEIGHT);
-		g.setFont(helvetica);
+		Font midnight = new Font("Blackout", Font.PLAIN, HEIGHT);
+		g.setFont(midnight);
 		g.drawString(name,x,y + HEIGHT);
 		
 	}
@@ -27,12 +27,12 @@ public class Paddle extends GameObject {
 	public Bullet fire()
 	{
 		Bullet bb = new Bullet(x + WIDTH/2, y, 0, -3);
-		if(name.equals("zing!"))
-			name = "wham!";
-		else if (name.equals("wham!"))
-			name = "bam!!";
+		if(name.equals("zzzing!"))
+			name = "whaaam!";
+		else if (name.equals("whaaam!"))
+			name = "bam!bam!";
 		else
-			name = "zing!";
+			name = "zzzing!";
 		return bb;
 	}
 }

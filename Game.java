@@ -25,6 +25,7 @@ public class Game {
 			}
 		});
 		panel.add(reset);
+		
 
 		// Put the frame on the screen
 		frame.pack();

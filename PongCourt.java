@@ -62,27 +62,29 @@ public class PongCourt extends JPanel {
 	}
 	
 	void tick() {
-		paddle.setBounds(getWidth(), getHeight());
-		paddle.move();
-		//ball.bounce(paddle.intersects(ball));
-		
-		for(Iterator<Bullet> ii = bullets.iterator(); ii.hasNext();)
+		if(paddle != null)
 		{
-			Bullet bb = ii.next();
-			if(bb.y > 0)
+			paddle.setBounds(getWidth(), getHeight());
+			paddle.move();
+		
+			for(Iterator<Bullet> ii = bullets.iterator(); ii.hasNext();)
 			{
-				bb.setBounds(getWidth(),getHeight());
-				bb.move();
-				Invader attacked = bb.attacked(invaders);
-				if(attacked != null) 
+				Bullet bb = ii.next();
+				if(bb.y > 0)
+				{
+					bb.setBounds(getWidth(),getHeight());
+					bb.move();
+					Invader attacked = bb.attacked(invaders);
+					if(attacked != null) 
+					{
+						ii.remove();
+						invaders.remove(attacked);
+					}
+				}
+				else
 				{
 					ii.remove();
-					invaders.remove(attacked);
 				}
-			}
-			else
-			{
-				ii.remove();
 			}
 		}
 		repaint(); // Repaint indirectly calls paintComponent.
@@ -90,6 +92,7 @@ public class PongCourt extends JPanel {
 	
 	void invade() {
 		invaders.add(new Invader(10,10,1,0));
+		boolean youlose = false;
 		for(Iterator<Invader> ii = invaders.iterator(); ii.hasNext();)
 		{
 			Invader inv = ii.next(); 
@@ -97,24 +100,40 @@ public class PongCourt extends JPanel {
 			inv.move();
 			if(inv.intersects(paddle) != Intersection.NONE)
 			{
-				timer.stop();
-				invader_timer.stop();
+				youlose = true;
 			}
+		}
+		
+		if(youlose)
+		{
+			invaders.clear();
+			paddle = null;
+			invader_timer.stop();
 		}
 		
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g); // Paint background, border
-		paddle.draw(g);
-		for (Bullet bb : bullets)
+		if(paddle != null)
 		{
-			bb.draw(g);
+			paddle.draw(g);
+			for (Bullet bb : bullets)
+			{
+				bb.draw(g);
+			}
+			
+			for(Invader inv : invaders)
+			{
+				inv.draw(g);
+			}
 		}
-		
-		for(Invader inv : invaders)
+		else
 		{
-			inv.draw(g);
+			Font blackout = new Font("Blackout", Font.PLAIN, 60);
+			g.setFont(blackout);
+			g.drawString("you lose", COURTWIDTH/2, COURTHEIGHT/2);
 		}
+
 	}
 }
