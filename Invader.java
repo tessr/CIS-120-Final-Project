@@ -12,12 +12,16 @@ public class Invader extends GameObject {
 	static int yOffset = 20;
 	int basey;
 	String name;
-	int power;
+	boolean power;
 
 	public Invader(int x, int y, int velocityX, int velocityY) {
 		super(x, y, SIZE, velocityY, SIZE, SIZE/2);
 		basey = y;
 		name = "" + randomCharacter();
+		power = randomPower();
+		svelocityX = SIZE;
+		next_svelocityX = svelocityX;
+		yOffset = 20;
 	}
 	
 	@Override
@@ -25,8 +29,6 @@ public class Invader extends GameObject {
 		x += svelocityX;
 		accelerate();
 		y = basey + yOffset;
-		
-		
 	}
 	
 	public static void nextround() 
@@ -51,7 +53,16 @@ public class Invader extends GameObject {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.blue);
-		Font comicsans = new Font("Comic Sans MS", Font.PLAIN, SIZE);
+		Font comicsans;
+		if(power) 
+		{ 
+			comicsans = new Font("Comic Sans MS", Font.BOLD, SIZE);
+		}
+		else
+		{
+			comicsans = new Font("Comic Sans MS", Font.PLAIN, SIZE);
+		}
+		
 		g.setFont(comicsans);
 		g.drawString(name,x,y + SIZE);
 
