@@ -10,7 +10,7 @@ public class PongCourt extends JPanel {
 	
 	private Paddle paddle;
 	private ArrayList<Bullet> bullets;
-	private ArrayList<Invader> invaders;
+	private Army invaders;
 
 	private int interval = 35; // Milliseconds between updates.
 	private Timer timer;       // Each time timer fires we animate one step.
@@ -62,7 +62,7 @@ public class PongCourt extends JPanel {
 	public void reset() {
 		paddle = new Paddle(COURTWIDTH, COURTHEIGHT);
 		bullets = new ArrayList<Bullet>();
-		invaders = new ArrayList<Invader>();
+		invaders = new Army(15, 5);
 		grabFocus();
 	}
 	
@@ -79,11 +79,10 @@ public class PongCourt extends JPanel {
 				{
 					bb.setBounds(getWidth(),getHeight());
 					bb.move();
-					Invader attacked = bb.attacked(invaders);
+					Invader attacked = invaders.kill(bb);
 					if(attacked != null) 
 					{
 						ii.remove();
-						invaders.remove(attacked);
 						score++;
 					}
 				}
@@ -97,9 +96,10 @@ public class PongCourt extends JPanel {
 	}
 	
 	void invade() {
-		invaders.add(new Invader(10,30,1,0));
+		//TODO: fix invaders
+		//invaders.add(new Invader(10,30,1,0));
 		boolean youlose = false;
-		for(Iterator<Invader> ii = invaders.iterator(); ii.hasNext();)
+		/*for(Iterator<Invader> ii = invaders.iterator(); ii.hasNext();)
 		{
 			Invader inv = ii.next(); 
 			inv.setBounds(getWidth(),getHeight());
@@ -120,7 +120,7 @@ public class PongCourt extends JPanel {
 			invaders.clear();
 			paddle = null;
 			invader_timer.stop();
-		}
+		}*/
 		
 	}
 
@@ -134,10 +134,12 @@ public class PongCourt extends JPanel {
 				bb.draw(g);
 			}
 			
-			for(Invader inv : invaders)
+			invaders.draw(g);
+			
+			/*for(Invader inv : invaders)
 			{
 				inv.draw(g);
-			}
+			}*/
 		}
 		else
 		{

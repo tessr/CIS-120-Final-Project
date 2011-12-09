@@ -27,7 +27,7 @@ public class Bullet extends GameObject {
 		g.drawString(name,x,y + SIZE);
 	}
 	
-	public Invader attacked(ArrayList<Invader> invaders)
+	/*public Invader attacked(Army invaders)
 	{
 		for(Invader ii : invaders)
 		{
@@ -37,6 +37,6 @@ public class Bullet extends GameObject {
 			}
 		}
 		return null;
-	}
+	}*/
 
 }
