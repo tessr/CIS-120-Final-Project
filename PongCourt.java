@@ -42,17 +42,30 @@ public class PongCourt extends JPanel {
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_LEFT)
-					paddle.setVelocity(-PADDLE_VEL, 0);
+				{
+					if(paddle != null)
+						paddle.setVelocity(-PADDLE_VEL, 0);
+				}
 				else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-					paddle.setVelocity(PADDLE_VEL, 0);
+				{
+					if(paddle!=null)
+						paddle.setVelocity(PADDLE_VEL, 0);
+				}
 				else if (e.getKeyCode() == KeyEvent.VK_SPACE)
-					bullets.add(paddle.fire());
+				{
+					if(paddle!=null)
+						bullets.add(paddle.fire());
+				}
 				else if (e.getKeyCode() == KeyEvent.VK_R)
+				{
 					reset();
+				}
+					
 			}
 
 			public void keyReleased(KeyEvent e) {
-				paddle.setVelocity(0, 0);
+				if(paddle != null)
+					paddle.setVelocity(0, 0);
 			}
 		});
 		// After a PongCourt object is built and installed in a container
@@ -64,7 +77,9 @@ public class PongCourt extends JPanel {
 		bullets = new ArrayList<Bullet>();
 		invaders = new Army(15, 5, getWidth(),getHeight());
 		grabFocus();
+		lives = 3;
 		invader_timer.start();
+		score = 0;
 	}
 	
 	void tick() {
