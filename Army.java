@@ -8,8 +8,8 @@ public class Army {
 	private int height;
 	private int jpanelwidth;
 	private int jpanelheight;
-	private int total;
-	private int killed;
+	int total;
+	int killed;
 
 	public Army(int x, int y, int jwid, int jhei) {
 		army = new Invader[x][y];
@@ -23,11 +23,10 @@ public class Army {
 		{
 			for(int yy = 0; yy < height; yy++)
 			{
-				int xpos = xx*(Invader.SIZE) + 20;
-				int ypos = yy*(Invader.SIZE) + 10;
+				int xpos = xx*(Invader.SIZE) + 30;
+				int ypos = yy*(Invader.SIZE) + 20;
 						
 				army[xx][yy] = new Invader(xpos,ypos,1,0);
-				System.out.println("New Invader: " + xpos + ", " + ypos);
 			}
 		}
 	}
@@ -35,6 +34,17 @@ public class Army {
 	public Invader getInvader(int x, int y)
 	{
 		return army[x][y];
+	}
+	
+	public void clear()
+	{
+		for(int xx = 0; xx < width; xx++)
+		{
+			for(int yy = 0; yy < height; yy++)
+			{
+				army[xx][yy] = null;
+			}
+		}
 	}
 	
 	public Invader kill(Bullet bb)
@@ -49,12 +59,33 @@ public class Army {
 				{
 					killedi = army[xx][yy];
 					army[xx][yy] = null;
-					killed--;
+					killed++;
 				}
 			}
 		}
 		
 		return killedi;
+	}
+	
+	public boolean hasKilled(Paddle paddle)
+	{
+		for(int xx = 0; xx < width; xx++)
+		{
+			for(int yy = 0; yy < height; yy++)
+			{
+				if(army[xx][yy] != null)
+				{
+					if (army[xx][yy].intersects(paddle) != 
+							Intersection.NONE)
+					{
+						army[xx][yy] = null;
+						return true;
+					}
+					
+				}
+			}
+		}
+		return false;
 	}
 	
 	public void move()

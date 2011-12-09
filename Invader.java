@@ -9,12 +9,13 @@ public class Invader extends GameObject {
 	static final int BUFFER = SIZE/2;
 	static int svelocityX = SIZE;
 	static int next_svelocityX = svelocityX;
-	static int yOffset = 0;
+	static int yOffset = 20;
 	int basey;
 	String name;
+	int power;
 
 	public Invader(int x, int y, int velocityX, int velocityY) {
-		super(x, y, SIZE, velocityY, SIZE, SIZE);
+		super(x, y, SIZE, velocityY, SIZE, SIZE/2);
 		basey = y;
 		name = "" + randomCharacter();
 	}
@@ -23,10 +24,6 @@ public class Invader extends GameObject {
 	public void move() {
 		x += svelocityX;
 		accelerate();
-		/*if(next_svelocityX != svelocityX)
-		{
-			x -= svelocityX;
-		}*/
 		y = basey + yOffset;
 		
 		

@@ -64,6 +64,7 @@ public class PongCourt extends JPanel {
 		bullets = new ArrayList<Bullet>();
 		invaders = new Army(15, 5, getWidth(),getHeight());
 		grabFocus();
+		invader_timer.start();
 	}
 	
 	void tick() {
@@ -97,32 +98,18 @@ public class PongCourt extends JPanel {
 	}
 	
 	void invade() {
-		//TODO: fix invaders
-		//invaders.add(new Invader(10,30,1,0));
 		invaders.move();
-		boolean youlose = false;
-		/*for(Iterator<Invader> ii = invaders.iterator(); ii.hasNext();)
+		
+		if(invaders.hasKilled(paddle))
 		{
-			Invader inv = ii.next(); 
-			inv.setBounds(getWidth(),getHeight());
-			inv.move();
-			if(inv.intersects(paddle) != Intersection.NONE)
+			lives--;
+			if(lives < 1)
 			{
-				lives--;
-				ii.remove();
-				if(lives < 1)
-				{
-				  youlose = true;
-				}
+				invaders = null;
+				paddle = null;
+				invader_timer.stop();
 			}
 		}
-		
-		if(youlose)
-		{
-			invaders.clear();
-			paddle = null;
-			invader_timer.stop();
-		}*/
 		
 	}
 
@@ -138,10 +125,6 @@ public class PongCourt extends JPanel {
 			
 			invaders.draw(g);
 			
-			/*for(Invader inv : invaders)
-			{
-				inv.draw(g);
-			}*/
 		}
 		else
 		{

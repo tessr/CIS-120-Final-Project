@@ -36,7 +36,7 @@ public class Game {
 						"use_your_spacebar_to_fire_helvetica_characters<br />" +
 						"at_the_oncoming_comic_sans_ms_invaders._use_<br />" +
 						"arrow_keys_to_move._some_invaders_are_tenacious;<br />" +
-						"hang_in_there!</span></html>");
+						"hang_in_there!_But_run_into_more_than_three...Game_over.</span></html>");
 		hello.add(welcome, BorderLayout.NORTH);
 		hello.add(instructions, BorderLayout.CENTER);
 		
