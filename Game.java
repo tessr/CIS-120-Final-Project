@@ -42,13 +42,15 @@ public class Game {
 				new JLabel("<html>" +
 						"<span style = 'font-family: Blackout; font-size: 35px'>" + 
 						"Welcome_to_Typeinvaders</span><br/>"+
-						"<span style = 'font-family: Blackout; font-size: 15px'>" +
-						"use_your_spacebar_to_fire_helvetica_characters<br />" +
-						"at_the_oncoming_comic_sans_ms_invaders._use_<br />" +
-						"arrow_keys_to_move._some_invaders_are_tenacious;<br />" +
-						"if_it's_bold,_fire_twice!_But_run_into_more_than_<br />" +
-						"three_" +
-						"and_you're_out,_sucker.</span></html>");
+						"<p><span style = 'font-family: Helvetica; font-size: 11px'>" +
+						"<b>Just like Space Invaders, but much scarier!</b><br />" +
+						"Use the spacebar to fire little Helvetica characters "+
+						" at the oncoming Comic Sans <br/> invaders. Use arrow keys " +
+						"to move your trusty exclamation point nozzle. Note: Some <br/>" +
+						"invaders are tenacious (a.k.a. bold) and need more than " +
+						"one hit before they die!<br />And be careful: If the nozzle " +
+						"is touched by three invaders, you lose!"+
+						"</span></p></html>");
 		hello.add(welcome, BorderLayout.NORTH);
 		hello.add(instructions_prompt, BorderLayout.CENTER);
 		
@@ -63,14 +65,14 @@ public class Game {
 		// Put the frame on the screen
 		frame.pack();
         frame.setVisible(true);
-        instructiondialog.setVisible(true);
+       /* instructiondialog.setVisible(true);
         instructiondialog.addWindowListener(new WindowAdapter(){
         	public void windowClosed(WindowEvent w)
         	{
         		if(w.getNewState() == WindowEvent.WINDOW_CLOSED)
         			System.out.println("HELLO");
         	}
-        });
+        });*/
         
        court.addKeyListener(new KeyAdapter(){
         	public void keyPressed(KeyEvent e)
