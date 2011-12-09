@@ -40,7 +40,9 @@ public abstract class GameObject {
 		y += velocityY;
 
 		accelerate();
-		clip();
+		//clip();
+		
+		System.out.println("post fx " + x + " + " + velocityX);
 	}
 
 	// Keep the object in the bounds of the court

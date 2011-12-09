@@ -16,8 +16,9 @@ public class Invader extends GameObject {
 
 	@Override
 	public void accelerate() {
-		if(x >= rightBound || x < 0 + SIZE)
+		if(x >= rightBound || x < 0 )
 		{
+			System.out.println("Right bound: " + rightBound);
 			velocityX = -velocityX;
 			y = y + SIZE + BUFFER;
 		}

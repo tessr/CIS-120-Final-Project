@@ -62,7 +62,7 @@ public class PongCourt extends JPanel {
 	public void reset() {
 		paddle = new Paddle(COURTWIDTH, COURTHEIGHT);
 		bullets = new ArrayList<Bullet>();
-		invaders = new Army(15, 5);
+		invaders = new Army(15, 5, getWidth(),getHeight());
 		grabFocus();
 	}
 	
@@ -71,6 +71,7 @@ public class PongCourt extends JPanel {
 		{
 			paddle.setBounds(getWidth(), getHeight());
 			paddle.move();
+			
 		
 			for(Iterator<Bullet> ii = bullets.iterator(); ii.hasNext();)
 			{
@@ -98,6 +99,7 @@ public class PongCourt extends JPanel {
 	void invade() {
 		//TODO: fix invaders
 		//invaders.add(new Invader(10,30,1,0));
+		invaders.move();
 		boolean youlose = false;
 		/*for(Iterator<Invader> ii = invaders.iterator(); ii.hasNext();)
 		{
