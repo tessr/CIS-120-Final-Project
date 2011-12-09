@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Paddle extends GameObject {
 	final static int HEIGHT = 55;
-	final static int WIDTH = 80;
-	String name = "zing!";
+	final static int WIDTH = 10;
+	String name = "!";
 
 	public Paddle(int courtwidth, int courtheight) {
 		super((courtwidth - WIDTH) / 2, courtheight - HEIGHT - 20, 0, 0, WIDTH, HEIGHT);
@@ -27,12 +27,12 @@ public class Paddle extends GameObject {
 	public Bullet fire()
 	{
 		Bullet bb = new Bullet(x + WIDTH/2, y, 0, -3);
-		if(name.equals("zzzing!"))
+		/*if(name.equals("zzzing!"))
 			name = "whaaam!";
 		else if (name.equals("whaaam!"))
 			name = "bam!bam!";
 		else
-			name = "zzzing!";
+			name = "zzzing!";*/
 		return bb;
 	}
 }
