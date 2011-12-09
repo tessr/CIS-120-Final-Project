@@ -69,12 +69,11 @@ public class Army {
 					army[xx][yy].move();
 					
 				}
-				else
-				{
-					System.out.println("null");
-				}
+
 			}
 		}
+		
+		Invader.nextround();
 	}
 	
 	public void draw(Graphics g) {

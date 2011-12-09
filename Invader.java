@@ -7,20 +7,46 @@ public class Invader extends GameObject {
 	
 	static final int SIZE = 30;
 	static final int BUFFER = SIZE/2;
+	static int svelocityX = SIZE;
+	static int next_svelocityX = svelocityX;
+	static int yOffset = 0;
+	int basey;
 	String name;
 
 	public Invader(int x, int y, int velocityX, int velocityY) {
 		super(x, y, SIZE, velocityY, SIZE, SIZE);
+		basey = y;
 		name = "" + randomCharacter();
+	}
+	
+	@Override
+	public void move() {
+		x += svelocityX;
+		accelerate();
+		/*if(next_svelocityX != svelocityX)
+		{
+			x -= svelocityX;
+		}*/
+		y = basey + yOffset;
+		
+		
+	}
+	
+	public static void nextround() 
+	{
+		if(svelocityX != next_svelocityX)
+		{
+			yOffset += SIZE;
+		}
+		svelocityX = next_svelocityX;
+		
 	}
 
 	@Override
 	public void accelerate() {
-		if(x >= rightBound || x < 0 )
+		if(x >= rightBound || x < 0 + SIZE )
 		{
-			System.out.println("Right bound: " + rightBound);
-			velocityX = -velocityX;
-			y = y + SIZE + BUFFER;
+			next_svelocityX = -svelocityX;
 		}
 
 	}
