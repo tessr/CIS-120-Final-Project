@@ -58,7 +58,15 @@ public class Army {
 						bb.intersects(army[xx][yy]) != Intersection.NONE)
 				{
 					killedi = army[xx][yy];
-					army[xx][yy] = null;
+					if(army[xx][yy].power)
+					{
+						army[xx][yy].power = false;
+					}
+					else
+					{
+						army[xx][yy] = null;
+					}
+					
 					killed++;
 				}
 			}

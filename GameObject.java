@@ -95,7 +95,13 @@ public abstract class GameObject {
 		Random rr = new Random();
 		char cc = (char)(rr.nextInt(26) + 'a');
 		return cc;
-		
+	}
+	
+	public boolean randomPower() {
+		Random rr = new Random();
+		int ii = rr.nextInt(3);
+		if(ii > 1) return true;
+		else return false;
 	}
 
 	public abstract void accelerate();
