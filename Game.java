@@ -65,14 +65,6 @@ public class Game {
 		// Put the frame on the screen
 		frame.pack();
         frame.setVisible(true);
-       /* instructiondialog.setVisible(true);
-        instructiondialog.addWindowListener(new WindowAdapter(){
-        	public void windowClosed(WindowEvent w)
-        	{
-        		if(w.getNewState() == WindowEvent.WINDOW_CLOSED)
-        			System.out.println("HELLO");
-        	}
-        });*/
         
        court.addKeyListener(new KeyAdapter(){
         	public void keyPressed(KeyEvent e)

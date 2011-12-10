@@ -53,12 +53,15 @@ public class PongCourt extends JPanel {
 				}
 				else if (e.getKeyCode() == KeyEvent.VK_SPACE)
 				{
-					if(paddle!=null)
+					if(paddle!=null && bullets != null)
 					{
 						addKeyListener(new KeyAdapter() {
 							public void keyReleased(KeyEvent f) {
 								if(f.getKeyCode() == KeyEvent.VK_SPACE)
-									bullets.add(paddle.fire());
+								{
+									if(paddle!=null && bullets != null)
+										bullets.add(paddle.fire());
+								}	
 							}
 						});
 						KeyListener[] listeners = getKeyListeners();

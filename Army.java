@@ -88,6 +88,12 @@ public class Army {
 		return killedi;
 	}
 	
+	/**
+	 * Has the army killed the paddle?
+	 * @param paddle
+	 * @return
+	 */
+	
 	public boolean hasKilled(Paddle paddle)
 	{
 		for(int xx = 0; xx < width; xx++)
