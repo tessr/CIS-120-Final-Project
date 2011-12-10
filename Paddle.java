@@ -27,12 +27,6 @@ public class Paddle extends GameObject {
 	public Bullet fire()
 	{
 		Bullet bb = new Bullet(x + WIDTH/2, y, 0, -3);
-		/*if(name.equals("zzzing!"))
-			name = "whaaam!";
-		else if (name.equals("whaaam!"))
-			name = "bam!bam!";
-		else
-			name = "zzzing!";*/
 		return bb;
 	}
 }

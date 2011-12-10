@@ -54,7 +54,19 @@ public class PongCourt extends JPanel {
 				else if (e.getKeyCode() == KeyEvent.VK_SPACE)
 				{
 					if(paddle!=null)
-						bullets.add(paddle.fire());
+					{
+						addKeyListener(new KeyAdapter() {
+							public void keyReleased(KeyEvent f) {
+								if(f.getKeyCode() == KeyEvent.VK_SPACE)
+									bullets.add(paddle.fire());
+							}
+						});
+						KeyListener[] listeners = getKeyListeners();
+						System.out.println(listeners.length);
+						removeKeyListener(listeners[listeners.length -2 ]);
+						
+					}
+						
 				}
 				else if (e.getKeyCode() == KeyEvent.VK_R)
 				{
@@ -64,7 +76,7 @@ public class PongCourt extends JPanel {
 			}
 
 			public void keyReleased(KeyEvent e) {
-				if(paddle != null)
+				if(paddle != null && e.getKeyCode() != KeyEvent.VK_SPACE)
 					paddle.setVelocity(0, 0);
 			}
 		});
@@ -108,6 +120,7 @@ public class PongCourt extends JPanel {
 					ii.remove();
 				}
 			}
+			
 		}
 		repaint(); // Repaint indirectly calls paintComponent.
 	}
@@ -130,6 +143,12 @@ public class PongCourt extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g); // Paint background, border
+		if(invaders != null && invaders.dead())
+		{
+			blackout.deriveFont(60);
+			g.setFont(blackout);
+			g.drawString("you win", COURTWIDTH/2, COURTHEIGHT/2);
+		}
 		if(paddle != null)
 		{
 			paddle.draw(g);
@@ -138,8 +157,7 @@ public class PongCourt extends JPanel {
 				bb.draw(g);
 			}
 			
-			invaders.draw(g);
-			
+			invaders.draw(g);	
 		}
 		else
 		{

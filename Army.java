@@ -31,6 +31,19 @@ public class Army {
 		}
 	}
 	
+	public boolean dead()
+	{
+		for(int xx = 0; xx < width; xx++)
+		{
+			for(int yy = 0; yy < height; yy++)
+			{
+				if(army[xx][yy] != null)
+					return false;
+			}
+		}
+		return true;
+	}
+	
 	public Invader getInvader(int x, int y)
 	{
 		return army[x][y];
