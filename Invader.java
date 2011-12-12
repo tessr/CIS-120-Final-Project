@@ -7,9 +7,18 @@ public class Invader extends GameObject {
 	
 	static final int SIZE = 30;
 	static final int BUFFER = SIZE/2;
+	
+	/*
+	 * The following three variables are static because all of the invaders move
+	 * at the same way at the same time. next_svelocityX is a little bit of a 
+	 * hack to get around the fact that when iterating through the array, the 
+	 * first Invader which signals the change would be affected differently from
+	 * all of the following arrays. 
+	 */
 	static int svelocityX = SIZE;
 	static int next_svelocityX = svelocityX;
 	static int yOffset = 20;
+	
 	int basey;
 	String name;
 	boolean power;
@@ -38,7 +47,6 @@ public class Invader extends GameObject {
 			yOffset += SIZE;
 		}
 		svelocityX = next_svelocityX;
-		
 	}
 
 	@Override

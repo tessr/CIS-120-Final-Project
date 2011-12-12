@@ -1,5 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -11,21 +14,34 @@ public class Game {
 		frame.setLocation(300, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBackground(Color.white);
+		
+		//fonts
+		File blackoutfile;
+		Font blackout = new Font("Blackout",Font.PLAIN,30);
+		
+		try
+		{
+			blackoutfile = new File("Blackout 2AM.ttf");
+			blackout = Font.createFont(Font.TRUETYPE_FONT, blackoutfile );
+		}
+		catch (FileNotFoundException e)
+		{
+			
+		}
+		catch (IOException e)
+		{
+			
+		}
+		catch (FontFormatException e)
+		{
+			
+		}
+		
 
 		// Main playing area
 		final PongCourt court = new PongCourt();
 		frame.add(court, BorderLayout.SOUTH);
-
-		// Reset button
-		final JPanel panel = new JPanel();
-		frame.add(panel, BorderLayout.NORTH);
-		final JButton reset = new JButton("Reset");
-		reset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				court.reset();
-			}
-		});
-		//panel.add(reset);
+		frame.setFont(new Font(blackout.getFontName(), Font.PLAIN, 30));
 		
 		final JPanel hello = new JPanel();
 		frame.add(hello, BorderLayout.NORTH);
@@ -55,6 +71,7 @@ public class Game {
 		hello.add(instructions_prompt, BorderLayout.CENTER);
 		
 		final JDialog instructiondialog = new JDialog();
+		instructiondialog.setFont(new Font(blackout.getFontName(), Font.PLAIN, 30));
 		instructiondialog.add(instructions);
 		
 		instructiondialog.setLocation(350,350);

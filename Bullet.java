@@ -1,8 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.List;
-import java.util.ArrayList;
+
 
 
 public class Bullet extends GameObject {
@@ -26,17 +25,5 @@ public class Bullet extends GameObject {
 		g.setFont(helvetica);
 		g.drawString(name,x,y + SIZE);
 	}
-	
-	/*public Invader attacked(Army invaders)
-	{
-		for(Invader ii : invaders)
-		{
-			if(intersects(ii) != Intersection.NONE)
-			{
-				return ii;
-			}
-		}
-		return null;
-	}*/
 
 }

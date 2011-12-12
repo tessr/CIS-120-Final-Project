@@ -1,5 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -25,9 +28,32 @@ public class PongCourt extends JPanel {
 	private int lives = 3;
 	private int score = 0;
 	
-	Font blackout = new Font("Blackout", Font.PLAIN, 60);
+	File blackoutfile;
+	Font blackout = new Font("Blackout",Font.PLAIN,30);
+	
+
+	
+
 
 	public PongCourt() {
+		
+		try
+		{
+			blackoutfile = new File("Blackout 2AM.ttf");
+			blackout = Font.createFont(Font.TRUETYPE_FONT, blackoutfile );
+		}
+		catch (FileNotFoundException e)
+		{
+			
+		}
+		catch (IOException e)
+		{
+			
+		}
+		catch (FontFormatException e)
+		{
+			
+		}
 		setPreferredSize(new Dimension(COURTWIDTH, COURTHEIGHT));
 		setFocusable(true);
 
@@ -55,26 +81,8 @@ public class PongCourt extends JPanel {
 				{
 					if(paddle!=null && bullets != null)
 					{
-						KeyListener newlistener = new KeyAdapter() {
-							public void keyReleased(KeyEvent f) {
-								if(f.getKeyCode() == KeyEvent.VK_SPACE)
-								{
-									if(paddle!=null && bullets != null)
-										bullets.add(paddle.fire());
-								}	
-							}
-						};
-						addKeyListener(newlistener);
-						KeyListener[] listeners = getKeyListeners();
-						//System.out.println(newlistener.toString());
-						//removeKeyListener(newlistener);
-						
-						//removeKeyListener(listeners[0]);
-						//removeKeyListener(listeners[1]);
-						//removeKeyListener(listeners[2]);
-						
-					}
-						
+						bullets.add(paddle.fire());
+					}	
 				}
 				else if (e.getKeyCode() == KeyEvent.VK_R)
 				{
@@ -151,10 +159,11 @@ public class PongCourt extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g); // Paint background, border
+		
 		if(invaders != null && invaders.dead())
 		{
-			blackout.deriveFont(60);
-			g.setFont(blackout);
+			g.setColor(Color.BLACK);
+			g.setFont(new Font(blackout.getFontName(), Font.PLAIN, 60));
 			g.drawString("you win", COURTWIDTH/2, COURTHEIGHT/2);
 		}
 		if(paddle != null)
@@ -169,8 +178,8 @@ public class PongCourt extends JPanel {
 		}
 		else
 		{
-			blackout.deriveFont(60);
-			g.setFont(blackout);
+			g.setColor(Color.BLACK);
+			g.setFont(new Font(blackout.getFontName(), Font.PLAIN, 60));
 			g.drawString("you lose", COURTWIDTH/2, COURTHEIGHT/2);
 		}
 		
